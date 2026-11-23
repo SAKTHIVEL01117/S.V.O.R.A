@@ -1,0 +1,46 @@
+# -----------------------------------------------------------------------------
+# Frontend Deployment — S.V.O.R.A Aircraft Maintenance Dashboard
+# -----------------------------------------------------------------------------
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: frontend-maintenance
+  labels:
+    app: frontend-maintenance
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend-maintenance
+  template:
+    metadata:
+      labels:
+        app: frontend-maintenance
+    spec:
+      containers:
+        - name: frontend-maintenance
+          image: ${FRONTEND_IMAGE}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 80
+              name: http
+          resources:
+            requests:
+              cpu: "50m"
+              memory: "64Mi"
+            limits:
+              cpu: "200m"
+              memory: "256Mi"
+          readinessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /
+              port: 80
+            initialDelaySeconds: 15
+            periodSeconds: 20

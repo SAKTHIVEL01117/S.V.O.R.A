@@ -1,0 +1,51 @@
+# Node.js & Frontend dependencies
+node_modules/
+dist/
+.vite/
+.agents/
+.taste-skill/
+shots/
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+# Python & Backend
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+env/
+venv/
+.venv/
+build/
+develop-eggs/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+uv.lock
+
+# Environment variables & secrets (Crucial for GitHub push protection)
+.env
+.env.local
+.env.*.local
+*.key
+*.pem
+kubernetes/aws-secrets.local.yml
+
+# IDE & OS files
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+Thumbs.db

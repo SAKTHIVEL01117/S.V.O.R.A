@@ -1,0 +1,17 @@
+# Docker ignore rules for backend
+__pycache__
+*.pyc
+*.pyo
+*.pyd
+.Python
+.venv
+env/
+venv/
+.env
+.git
+.gitignore
+.dockerignore
+docker-compose.yml
+.pytest_cache
+*.log
+uv.lock

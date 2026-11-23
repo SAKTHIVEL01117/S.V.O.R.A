@@ -1,0 +1,69 @@
+# -----------------------------------------------------------------------------
+# Backend Deployment — S.V.O.R.A Aircraft Maintenance API
+# -----------------------------------------------------------------------------
+
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: backend-api-maintenance
+  labels:
+    app: backend-api-maintenance
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: backend-api-maintenance
+  template:
+    metadata:
+      labels:
+        app: backend-api-maintenance
+    spec:
+      containers:
+        - name: backend-api-maintenance
+          image: ${BACKEND_IMAGE}
+          imagePullPolicy: Always
+          ports:
+            - containerPort: 8000
+              name: http
+          envFrom:
+            - secretRef:
+                name: aws-credentials
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          readinessProbe:
+            httpGet:
+              path: /testing/health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /testing/health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20
+
+          resources:
+            requests:
+              cpu: "100m"
+              memory: "128Mi"
+            limits:
+              cpu: "500m"
+              memory: "512Mi"
+          readinessProbe:
+            httpGet:
+              path: /testing/health
+              port: 8000
+            initialDelaySeconds: 5
+            periodSeconds: 10
+          livenessProbe:
+            httpGet:
+              path: /testing/health
+              port: 8000
+            initialDelaySeconds: 15
+            periodSeconds: 20

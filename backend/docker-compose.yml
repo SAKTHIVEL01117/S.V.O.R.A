@@ -1,0 +1,22 @@
+services:
+  backend:
+    build:
+      context: .
+      dockerfile: dockerfile
+    # Tag for local testing or set ECR_REGISTRY for AWS ECR push
+    image: ${ECR_REGISTRY:-svora-backend}:${IMAGE_TAG:-latest}
+    container_name: svora-backend
+    ports:
+      - "${PORT:-8000}:8000"
+    environment:
+      - HOST=0.0.0.0
+      - PORT=8000
+      - CORS_ORIGINS=*
+      - MOCK_BEDROCK=${MOCK_BEDROCK:-false}
+      - ALLOW_FALLBACK=${ALLOW_FALLBACK:-true}
+      - AWS_REGION=${AWS_REGION:-us-east-1}
+      - AWS_ACCESS_KEY_ID=${AWS_ACCESS_KEY_ID:-}
+      - AWS_SECRET_ACCESS_KEY=${AWS_SECRET_ACCESS_KEY:-}
+      - AWS_SESSION_TOKEN=${AWS_SESSION_TOKEN:-}
+      - BEDROCK_MODEL_ID=${BEDROCK_MODEL_ID:-amazon.nova-pro-v1:0}
+    restart: unless-stopped
