@@ -1,5 +1,5 @@
-// Use VITE_API_BASE_URL from .env, fallback to localhost:8000
-const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://localhost:8000').replace(/\/$/, '');
+// Use VITE_API_BASE_URL from .env, fallback to the AWS Load Balancer backend
+const API_BASE_URL = (import.meta.env.VITE_API_BASE_URL || 'http://a8a94145817e34fa1b1e8b4238d60b21-1786539109.ap-southeast-2.elb.amazonaws.com').replace(/\/$/, '');
 
 async function request(path, options = {}) {
   const url = `${API_BASE_URL}${path}`;
